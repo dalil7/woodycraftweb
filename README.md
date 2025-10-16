@@ -23,12 +23,6 @@ Le besoin métier est donc de créer un site e-commerce complet permettant :
   - De gérer leurs **adresses de livraison**
   - De passer **une commande** et recevoir une **facture**
 
-- À l’**administrateur** :
-  - De gérer le **catalogue de produits**
-  - D’administrer les **catégories**
-  - De consulter et suivre les **commandes clients**
-
-Le site répond ainsi à un besoin de **gestion centralisée des ventes** tout en offrant une **expérience utilisateur fluide**.
 
 ---
 
