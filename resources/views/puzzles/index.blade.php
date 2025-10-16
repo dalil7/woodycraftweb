@@ -9,56 +9,46 @@
         </h2>
     </x-slot>
 
-    <div class="container flex justify-center mx-auto">
-        <div class="flex flex-col">
-            <div class="w-full">
-                <div class="border-b border-gray-200 shadow pt-6">
-                    <table class="min-w-full">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-2 py-2 text-xs text-gray-500">#</th>
-                                <th class="px-2 py-2 text-xs text-gray-500">Nom</th>
-                                <th class="px-2 py-2 text-xs text-gray-500"></th>
-                                <th class="px-2 py-2 text-xs text-gray-500"></th>
-                                <th class="px-2 py-2 text-xs text-gray-500"></th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white">
-                            @forelse ($puzzles as $puzzle)
-                                <tr class="whitespace-nowrap">
-                                    <td class="px-4 py-4 text-sm text-gray-500">{{ $puzzle->id }}</td>
-                                    <td class="px-4 py-4">{{ $puzzle->nom }}</td>
+    <div class="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
+        @if($puzzles->count() > 0)
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                @foreach ($puzzles as $puzzle)
+                    <div class="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden">
+                        {{-- Image --}}
+                        @if($puzzle->image)
+                            <img src="{{ asset($puzzle->image) }}" 
+                                 alt="{{ $puzzle->nom }}" 
+                                 class="w-full h-56 object-cover rounded-t">
+                        @else
+                            <div class="w-full h-56 flex items-center justify-center bg-gray-100 text-gray-500 rounded-t">
+                                Pas d'image
+                            </div>
+                        @endif
 
-                                    <x-link-button href="{{ route('puzzles.show', $puzzle->id) }}">
-                                        @lang('Afficher')
-                                    </x-link-button>
+                        {{-- Infos produit --}}
+                        <div class="p-4">
+                            <h3 class="text-lg font-bold truncate">{{ $puzzle->nom }}</h3>
+                            <p class="text-sm text-gray-500 mb-2">
+                                Catégorie : {{ $puzzle->categorie->nom ?? '—' }}
+                            </p>
+                            <p class="text-indigo-600 font-bold text-lg mb-4">{{ $puzzle->prix }} €</p>
 
-                                    <x-link-button href="{{ route('puzzles.edit', $puzzle->id) }}">
-                                        @lang('Modifier')
-                                    </x-link-button>
-
-                                    <x-link-button
-                                        onclick="event.preventDefault(); document.getElementById('destroy{{ $puzzle->id }}').submit();">
-                                        @lang('Supprimer')
-                                    </x-link-button>
-
-                                    <form id="destroy{{ $puzzle->id }}" action="{{ route('puzzles.destroy', $puzzle->id) }}"
-                                          method="POST" style="display: none;">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="5" class="px-4 py-4 text-center text-gray-500">
-                                        Aucun puzzle trouvé @if(isset($categorie)) pour cette catégorie @endif.
-                                    </td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
+                            <div class="flex space-x-2">
+                                <a href="{{ route('puzzles.show', $puzzle->id) }}"
+                                   class="flex-1 text-center bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-600 text-sm">
+                                   Voir détails
+                                </a>
+                                <a href="{{ route('cart.add', $puzzle->id) }}"
+                                   class="flex-1 text-center bg-green-500 text-white px-3 py-2 rounded hover:bg-green-600 text-sm">
+                                   🛒 Ajouter
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
-        </div>
+        @else
+            <p class="text-gray-600 text-center">Aucun puzzle trouvé @if(isset($categorie)) pour cette catégorie @endif.</p>
+        @endif
     </div>
 </x-app-layout>

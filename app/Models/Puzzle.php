@@ -9,32 +9,33 @@ class Puzzle extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'nom',
-        'categorie',
-        'description',
-        'prix',
-        'image',
-    ];
-
-public function categorie()
-{
-    return $this->belongsTo(Categorie::class);
-}
-}
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-
-class Puzzle extends Model
-{
     protected $table = 'puzzles';
 
-    protected $fillable = ['nom', 'categorie', 'description', 'image', 'prix'];
+    protected $fillable = [
+        'nom',
+        'id_categorie',
+        'description',
+        'image',
+        'prix',
+        'stock',
+    ];
 
+    /**
+     * 🔹 Un puzzle appartient à une catégorie
+     */
     public function categorie()
     {
-        // Relation inversée : Puzzle appartient à une Categorie
-        return $this->belongsTo(Categorie::class, 'categorie', 'nom');
+        return $this->belongsTo(Categorie::class, 'id_categorie');
+    }
+
+    /**
+     * 🔹 Un puzzle peut appartenir à plusieurs paniers (via la table "appartient")
+     * ⚠️ La table pivot contient : id_Puzzle et id_Panier
+     */
+    public function paniers()
+    {
+        return $this->belongsToMany(Panier::class, 'appartient', 'id_Puzzle', 'id_Panier')
+                    ->withPivot('quantite')
+                    ->withTimestamps(); // utile pour suivre les ajouts au panier
     }
 }

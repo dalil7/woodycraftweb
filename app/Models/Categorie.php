@@ -9,22 +9,13 @@ class Categorie extends Model
 {
     use HasFactory;
 
+    protected $table = 'categories';
+
     protected $fillable = ['nom'];
-}
 
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-
-class Puzzle extends Model
-{
-    protected $table = 'puzzles';
-
-    protected $fillable = ['nom', 'categorie', 'description', 'image', 'prix'];
-
-    public function categorie()
+    public function puzzles()
     {
-        // Relation inversée : Puzzle appartient à une Categorie
-        return $this->belongsTo(Categorie::class, 'categorie', 'nom');
+        // relation via id_categorie dans puzzles
+        return $this->hasMany(Puzzle::class, 'id_categorie');
     }
 }

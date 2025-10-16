@@ -52,11 +52,14 @@ class PuzzleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        $puzzle = Puzzle::findOrFail($id);
-        return view('puzzles.show', compact('puzzle')); 
+        // on charge la catégorie liée pour éviter les requêtes supplémentaires
+        $puzzle = \App\Models\Puzzle::with('categorie')->findOrFail($id);
+    
+        return view('puzzles.show', compact('puzzle'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -110,7 +113,7 @@ class PuzzleController extends Controller
 public function parCategorie($id)
 {
     $categorie = \App\Models\Categorie::findOrFail($id);
-    $puzzles = \App\Models\Puzzle::where('categorie_id', $id)->get();
+    $puzzles = \App\Models\Puzzle::where('id_categorie', $id)->get();
 
     return view('puzzles.parCategorie', compact('puzzles', 'categorie'));
 }
