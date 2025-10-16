@@ -79,7 +79,7 @@ Les relations entre ces entités ont été modélisées à l’aide d’un **dia
 ### Étapes d’installation
 ```bash
 # 1. Cloner le dépôt
-git clone https://github.com/ton-utilisateur/woodycraft.git
+git clone https://github.com/dalil7/woodycraft.git
 cd woodycraft
 
 # 2. Installer les dépendances Laravel
