@@ -51,9 +51,6 @@ Le projet a été développé et testé sous **Laragon 6.0** avec la configurati
 | MySQL | 8.0.30 |
 | Ports utilisés | HTTP : 80 · MySQL : 3306 |
 
-Exemple d’écran Laragon :
-
-![Laragon Serveur](./assets/laragon.png)
 
 ---
 
