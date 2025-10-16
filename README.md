@@ -1,98 +1,155 @@
-# 🪵 WoodyCraft
+# WoodyCraft
 
-## (a) Présentation du besoin métier
+## Présentation générale
 
-L’entreprise **WoodyCraft** souhaite proposer une plateforme de **vente en ligne de puzzles 3D en bois**.  
-Ces puzzles, à assembler soi-même, sont destinés à un public passionné par les objets artisanaux, la décoration et la mécanique en bois.
+**WoodyCraft** est un site e-commerce développé dans le cadre du **BTS SIO option SLAM**.  
+Il permet la vente en ligne de **puzzles 3D en bois** à assembler soi-même.  
+Ce projet illustre la mise en place complète d’une application web professionnelle, de la modélisation à la mise en production.
 
-Le site a pour objectif de :
-- Offrir une **expérience utilisateur simple et fluide** pour l’achat de puzzles 3D.
-- Permettre aux utilisateurs de **créer un compte**, de **gérer leurs adresses** et de **commander en ligne**.
-- Fournir une **interface d’administration** pour gérer les produits, catégories et commandes.
-- Générer des **factures automatiques** et permettre un suivi des achats.
-- Centraliser la **gestion des stocks** et des **catégories** de produits.
+L’objectif principal est de **digitaliser une boutique artisanale** de puzzles en bois et de proposer une plateforme moderne, ergonomique et sécurisée.
 
-Le projet répond à un **besoin réel de digitalisation** d’une boutique artisanale, tout en respectant les bonnes pratiques du développement web moderne.
+---
+
+## (a)  Présentation du besoin métier
+
+L’entreprise **WoodyCraft** souhaite étendre sa visibilité en ligne et faciliter la vente de ses produits artisanaux.  
+Avant ce projet, la vente ne se faisait qu’en boutique physique.  
+Le besoin métier est donc de créer un site e-commerce complet permettant :
+
+- Aux **clients** :
+  - De consulter les puzzles disponibles (avec images, descriptions et prix)
+  - De créer un **compte utilisateur**
+  - D’ajouter des produits à un **panier**
+  - De gérer leurs **adresses de livraison**
+  - De passer **une commande** et recevoir une **facture**
+
+- À l’**administrateur** :
+  - De gérer le **catalogue de produits**
+  - D’administrer les **catégories**
+  - De consulter et suivre les **commandes clients**
+
+Le site répond ainsi à un besoin de **gestion centralisée des ventes** tout en offrant une **expérience utilisateur fluide**.
+
+---
+
+## ⚙️ Objectifs techniques
+
+- Développer une application complète avec le framework **Laravel**
+- Concevoir une **base de données relationnelle** fiable et cohérente
+- Mettre en place une **interface responsive et intuitive**
+- Sécuriser l’accès via un système d’authentification Laravel
+- Automatiser la **génération de factures** au format PDF
+- Permettre une **administration simple** via un tableau de bord
 
 ---
 
 ## (c) Modélisation UML
 
-Le diagramme UML ci-dessous présente les principales classes et relations utilisées dans le projet :
-
-📘 **Diagramme UML des entités :**
+Le diagramme UML décrit les entités principales et leurs relations dans l’application.
 
 ![Diagramme UML](./assets/uml_woodycraft.png)
 
-### Description :
-- `User` : représente un utilisateur inscrit sur le site (client ou administrateur).  
-- `Adresse` : contient les coordonnées de livraison liées à un utilisateur.  
-- `Puzzle` : représente un produit en bois disponible à la vente.  
-- `Categorie` : regroupe plusieurs puzzles selon leur type (animal, véhicule, architecture, etc.).  
-- `Panier` : permet de stocker les puzzles ajoutés avant la commande.  
-- `Commande` : représente une transaction validée avec un utilisateur et une adresse.  
+### Explication des classes principales
+
+| Classe | Rôle |
+|--------|------|
+| **User** | Représente un utilisateur (client ou administrateur) |
+| **Adresse** | Stocke les adresses de livraison ou de facturation |
+| **Puzzle** | Produit vendu sur le site |
+| **Categorie** | Catégorise les puzzles (ex : animaux, véhicules, monuments…) |
+| **Panier** | Contient les puzzles sélectionnés par un utilisateur |
+| **Commande** | Regroupe les informations d’un achat validé |
+
+Les relations principales sont :
+- Un **utilisateur** possède plusieurs **adresses**  
+- Une **catégorie** contient plusieurs **puzzles**  
+- Un **puzzle** peut appartenir à plusieurs **paniers**  
+- Une **commande** appartient à un **utilisateur** et à une **adresse**
 
 ---
 
-## (d) Maquette de l’application
+## (d)  Maquettes de l’application
 
-La maquette a été conçue pour proposer une **navigation claire** et **esthétique**, adaptée aux besoins de l’utilisateur et de l’administrateur.
+Les maquettes ont été conçues pour assurer une **navigation claire et cohérente** entre les différentes pages du site.
 
-📱 **Aperçu des interfaces principales :**
-
-| Page | Description | Capture |
-|------|--------------|----------|
-| Page d’accueil | Liste des puzzles 3D avec images, prix et bouton “Ajouter au panier” | ![Accueil](./assets/maquette_accueil.png) |
-| Page produit | Détails d’un puzzle (photo, description, prix, bouton panier) | ![Produit](./assets/maquette_produit.png) |
-| Panier | Récapitulatif des produits sélectionnés avant commande | ![Panier](./assets/maquette_panier.png) |
-| Tableau de bord admin | Gestion des puzzles et catégories | ![Dashboard](./assets/maquette_admin.png) |
-
-> Les maquettes ont été réalisées à l’aide de **Figma** (ou un autre outil de conception selon ton cas).
+| Page | Description | 
+|------|--------------|----------------|
+| **Accueil** | Présente les puzzles 3D disponibles, avec image, prix et bouton d’ajout au panier |
+| **Page produit** | Détails du puzzle sélectionné (photo, description, prix) |
+| **Panier** | Liste des produits ajoutés, avec possibilité de modification et suppression | 
+| **Commande / Facture** | Récapitulatif de la commande validée et génération de facture PDF |
+| **Tableau de bord admin** | Gestion des produits, catégories et utilisateurs |
+> Les maquettes ont été réalisées avec **Figma**, dans un style minimaliste et ergonomique.
 
 ---
 
-## (e) Modélisation de la base de données
-
-La base de données est conçue selon le **modèle relationnel MySQL**.  
-Elle garantit la cohérence des informations entre les utilisateurs, produits, commandes et adresses.
-
-📊 **Schéma de la base de données :**
+## (e) 🗄️ Modélisation de la base de données
 
 ![Modèle BDD](./assets/bdd_woodycraft.png)
 
-### Tables principales :
-| Table | Description |
-|--------|--------------|
-| **users** | Contient les informations des utilisateurs (nom, email, mot de passe, rôle). |
-| **adresses** | Gère les adresses de livraison et de facturation liées à chaque utilisateur. |
-| **puzzles** | Liste les puzzles 3D disponibles à la vente (nom, description, prix, image, stock). |
-| **categories** | Catégorise les puzzles par type. |
-| **paniers** | Stocke les puzzles ajoutés par les utilisateurs avant validation. |
-| **commandes** | Contient les informations relatives aux achats effectués. |
-| **factures** *(optionnel)* | Permet de générer un document PDF pour chaque commande. |
+### Structure et relations
 
-### Relations principales :
-- **Un utilisateur** possède plusieurs **adresses**.  
-- **Une catégorie** regroupe plusieurs **puzzles**.  
-- **Un puzzle** peut apparaître dans plusieurs **paniers** (relation Many-to-Many).  
-- **Une commande** appartient à un **utilisateur** et à une **adresse**.
+| Table | Description |
+|--------|-------------|
+| **users** | Informations des utilisateurs (nom, email, mot de passe, rôle) |
+| **adresses** | Adresses associées aux utilisateurs |
+| **puzzles** | Produits disponibles à la vente |
+| **categories** | Regroupe les puzzles par thème |
+| **paniers** | Panier de chaque utilisateur |
+| **commandes** | Regroupe les informations d’un achat |
+| **factures** | Génération automatique après validation d’une commande |
+
+Les **relations** entre les tables respectent les bonnes pratiques de la **3e forme normale (3NF)**, garantissant la cohérence des données.
 
 ---
 
 ## Technologies utilisées
-- **Backend :** PHP 8 / Laravel 10  
-- **Frontend :** Blade, Tailwind CSS  
-- **Base de données :** MySQL  
-- **Serveur local :** Laragon  
-- **Outils :** VS Code, GitHub, HeidiSQL, Figma
+
+| Domaine | Technologies |
+|----------|--------------|
+| **Backend** | PHP 8 / Laravel 10 |
+| **Frontend** | Blade, Tailwind CSS |
+| **Base de données** | MySQL |
+| **Serveur local** | Laragon 6.0 |
+| **Outils** | VS Code, GitHub, HeidiSQL, Figma |
+
+### Environnement de développement
+- **Apache** : 2.4.54  
+- **PHP** : 8.1.10  
+- **MySQL** : 8.0.30  
+- **Ports utilisés** : HTTP 80 / MySQL 3306  
+
+![Laragon](./assets/laragon.png)
 
 ---
 
-## Auteur
-Projet réalisé par **Dalil Aitchaib**, étudiant en **BTS SIO SLAM**  
-dans le cadre du projet de fin d’année 2025.
+## Installation du projet
 
----
+### Prérequis
+- PHP ≥ 8.0  
+- Composer  
+- MySQL  
+- Laragon (ou XAMPP, WAMP…)
 
-## Licence
-Projet à but pédagogique – © 2025 WoodyCraft, tous droits réservés.
+### Étapes
+```bash
+# 1. Cloner le dépôt
+git clone https://github.com/ton-utilisateur/woodycraft.git
+cd woodycraft
+
+# 2. Installer les dépendances Laravel
+composer install
+
+# 3. Créer le fichier d’environnement
+cp .env.example .env
+
+# 4. Générer la clé d’application
+php artisan key:generate
+
+# 5. Configurer la base de données dans le fichier .env
+
+# 6. Lancer les migrations et les seeders
+php artisan migrate --seed
+
+# 7. Démarrer le serveur Laravel
+php artisan serve
