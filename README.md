@@ -1,5 +1,4 @@
-# Create an HTML README file for WoodyCraft in French (style classique)
-html_content = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
@@ -220,10 +219,3 @@ cd woodycraft</code></pre>
   </div>
 </body>
 </html>
-"""
-
-path = "/mnt/data/README_WoodyCraft.html"
-with open(path, "w", encoding="utf-8") as f:
-    f.write(html_content)
-
-path
