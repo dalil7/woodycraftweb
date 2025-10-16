@@ -41,7 +41,7 @@ Le besoin métier est donc de créer un site e-commerce complet permettant :
 
 Le diagramme UML décrit les entités principales et leurs relations dans l’application.
 
-![Diagramme UML](./assets/uml_woodycraft.png)
+![Diagramme UML](./image.png)
 
 ### Explication des classes principales
 
