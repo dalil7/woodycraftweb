@@ -128,7 +128,7 @@ Les **relations** entre les tables respectent les bonnes pratiques de la **3e fo
 ### Étapes
 ```bash
 # 1. Cloner le dépôt
-git clone https://github.com/ton-utilisateur/woodycraft.git
+git clone https://github.com/dalil7/woodycraft.git
 cd woodycraft
 
 # 2. Installer les dépendances Laravel
